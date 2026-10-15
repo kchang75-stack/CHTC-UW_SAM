@@ -1,0 +1,13 @@
+Bootstrap: docker
+From: pytorch/pytorch:2.4.1-cuda12.1-cudnn9-runtime
+
+%post
+    python3 -m pip install --upgrade pip
+    python3 -m pip install "transformers" pillow numpy
+    python3 -m pip install opencv-python-headless
+    python3 -m pip install peft accelerate
+
+%environment
+    export HF_HOME=/tmp/hf_cache
+    export HF_HUB_CACHE=/tmp/hf_cache
+    export TRANSFORMERS_CACHE=/tmp/hf_cache

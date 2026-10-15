@@ -1,0 +1,23 @@
+universe = vanilla
+
+container_image = sam3.sif
+executable = sam3_test.py
+
+transfer_executable = True
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+request_gpus = 1
+request_cpus = 2
+request_memory = 8GB
+request_disk = 40GB
+
+output = logs/sam3_$(Cluster)_$(Process).out
+error  = logs/sam3_$(Cluster)_$(Process).err
+log    = logs/sam3_$(Cluster).log
+
+transfer_input_files = hf_token.txt, images/$(img), postprocess/region_features.py, postprocess/region_filter.py, postprocess/__init__.py
+arguments = --image $(img) --prompt particles --threshold 0.05 --mask-threshold 0.10 --alpha 110 --out-dir outputs/$(img) --tar outputs_$(img).tar.gz
+
++WantGPULab = true
+queue img from jobs.txt

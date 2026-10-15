@@ -1,0 +1,26 @@
+universe = vanilla
+container_image = sam3.sif
+
+executable = /opt/conda/bin/python3
+arguments = train_sam3_lora.py --train-root lora_dataset/train --val-root lora_dataset/val --output-dir sam3_lora_out --epochs 1 --batch-size 1 --lr 1e-4 --prompt particle --image-size 256 --lora-r 4 --lora-alpha 8
+
+transfer_executable = False
+transfer_input_files = train_sam3_lora.py,lora_dataset,hf_token.txt
+transfer_output_files = sam3_lora_out
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+environment = "PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True"
+
+request_gpus = 1
+request_cpus = 2
+request_memory = 16GB
+request_disk = 50GB
+
+requirements = regexp("A100|L40|L40S|H100|H200|P100", TARGET.CUDADeviceName)
+
+output = logs/lora_$(Cluster)_$(Process).out
+error  = logs/lora_$(Cluster)_$(Process).err
+log    = logs/lora_$(Cluster).log
+
+queue

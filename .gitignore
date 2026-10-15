@@ -1,0 +1,58 @@
+# compressed image arhvies
+*.jpg.tar.gz
+
+# text files
+*.txt
+!requirements.txt
+
+# Creds
+gitkey*
+*token*
+.env
+.env.*
+
+# Python Cache
+__pycache__/
+*.pyc
+.venv/
+
+# Hugging Face Cache
+hf_cache/
+
+# Models
+*.sif
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Datasets/Images
+images/
+images_v2/
+aggregated_clean/
+lora_dataset/
+
+# Generated Outputs
+outputs/
+logs/
+lora_compare_out/
+sam3_lora_out/
+postprocess/
+tmp/
+
+# Test output directories (if generated)
+test01/
+test02/
+test03/
+test04/
+test05/
+test06/
+test_big/
+test_big01/
+test_big02/
+
+# Job logs
+*.log
+*.out
+*.err
+slurm-*.out
